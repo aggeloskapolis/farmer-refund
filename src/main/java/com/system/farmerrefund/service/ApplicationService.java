@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ApplicationService {
 
     @Autowired
-    private static ApplicationRepository applicationRepository;
+    private ApplicationRepository applicationRepository;
 
     public List <Application> getApplicationsByFarmersId(Integer farmerId){
         return  applicationRepository.findByFarmerId(farmerId);
@@ -29,5 +29,9 @@ public class ApplicationService {
 
     public Optional<Application> getApplicationById(Integer applicationId) {
         return applicationRepository.findById(applicationId);
+    }
+
+    public List<Application> getAllApplications() {
+        return applicationRepository.findAll();
     }
 }

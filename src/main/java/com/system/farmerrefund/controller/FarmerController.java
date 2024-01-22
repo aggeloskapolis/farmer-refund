@@ -20,7 +20,7 @@ public class FarmerController {
     public String showFarmers(Model model) {
         List<Farmer> farmers = farmerService.getAllFarmers();
         model.addAttribute("farmers", farmers);
-        return "farmers";
+        return "farmers"; // Assuming "farmers.html" is the Thymeleaf template
     }
 
     @GetMapping("/new")
@@ -30,13 +30,13 @@ public class FarmerController {
         return "add_farmer";
     }
 
-    @GetMapping("/{farmerId}")
+   /* @GetMapping("/{farmerId}")
     public String editFarmer(@PathVariable Integer farmerId, Model model) {
         Farmer farmer = FarmerService.getFarmerById(farmerId);
         model.addAttribute("farmer", farmer);
         return "add_farmer";
     }
-
+*/
     @PostMapping("/new")
     public String saveFarmer(@ModelAttribute("farmer") Farmer farmer, Model model) {
         farmerService.saveFarmer(farmer);

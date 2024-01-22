@@ -1,0 +1,30 @@
+<applications>
+    <!-- fragments/applications-fragment.html -->
+    <div th:if="${not #lists.isEmpty(applications)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Production Details</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Approved</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="app : ${applications}">
+                <td th:text="${app.title}"></td>
+                <td th:text="${app.productionDetails}"></td>
+                <td th:text="${app.location}"></td>
+                <td th:text="${app.description}"></td>
+                <td th:text="${app.approved} ? 'Yes' : 'No'"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(applications)}">
+        No Applications found!
+    </div>
+
+
+</applications>

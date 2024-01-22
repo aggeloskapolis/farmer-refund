@@ -5,9 +5,8 @@ import jakarta.persistence.*;
 import java.net.Inet4Address;
 import java.util.HashSet;
 import java.util.Set;
-
 @Entity
-@Table(name  ="applications")
+@Table(name = "applications")
 public class Application {
 
     @Id
@@ -24,10 +23,12 @@ public class Application {
     private String description;
     @Column
     private boolean approved;
+    @Column
+    private Integer farmerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "farmer_id")
-    private Farmer farmer;
+    private Farmer farmer;*/
 
     public Application() {
     }
@@ -39,6 +40,8 @@ public class Application {
         this.description = description;
         this.approved = approved;
     }
+
+    // Getters and setters
 
     public Integer getId() {
         return id;
@@ -88,10 +91,30 @@ public class Application {
         this.approved = approved;
     }
 
+    public Integer getFarmerId() {
+        return farmerId;
+    }
+
+    public void setFarmerId(Integer farmerid) {
+        this.farmerId = farmerid;
+    }
+
+    /*  public Farmer getFarmer() {
+        return farmer;
+    }
+
+    public void setFarmer(Farmer farmer) {
+        this.farmer = farmer;
+    }
+*/
+
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "farmer_application",
             joinColumns = @JoinColumn(name = "farmer_id"),
             inverseJoinColumns = @JoinColumn(name = "application_id"))
     private Set<Application> applications = new HashSet<>();
+
+
 }
 

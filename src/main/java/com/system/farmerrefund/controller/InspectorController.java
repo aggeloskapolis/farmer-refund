@@ -12,24 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/inspectors")
+@RequestMapping("")
 public class InspectorController {
 
     @Autowired
     private InspectorService inspectorService;
 
-    @GetMapping("")
+    @GetMapping("/inspectors")
     public String showInspectors(Model model) {
         List<Inspector> inspectors = inspectorService.getAllInspectors();
         model.addAttribute("inspectors", inspectors);
         return "inspectors";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/addinspector")
     public String addInspector(Model model) {
         Inspector inspector = new Inspector();
         model.addAttribute("inspector", inspector);
-        return "add_inspector";
+        return "new_inspector";
     }
 
     @GetMapping("/{inspectorId}")
@@ -39,7 +39,7 @@ public class InspectorController {
         return "add_inspector";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/saveinspector")
     public String saveInspector(@ModelAttribute("inspector") Inspector inspector, Model model) {
         inspectorService.saveInspector(inspector);
         model.addAttribute("inspectors", inspectorService.getAllInspectors());

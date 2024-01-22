@@ -11,10 +11,7 @@ public class Farmer {
     private Integer Id;
 
     @Column
-    private String firstName;
-    @Column
-    private String lastName;
-
+    private String fullName;
     @Column
     private String farmersNumber;
 
@@ -29,13 +26,10 @@ public class Farmer {
         return Id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
 
     public String getFarmersNumber() {
         return farmersNumber;
@@ -50,12 +44,8 @@ public class Farmer {
         Id = id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String firstName) {
+        this.fullName = firstName;
     }
 
     public void setFarmersNumber(String farmersNumber) {
@@ -69,9 +59,8 @@ public class Farmer {
     public Farmer(Integer currentFarmerId) {
     }
 
-    public Farmer(String firstName, String lastName, String email, String farmersNumber){
-        this.firstName=firstName;
-        this.lastName=lastName;
+    public Farmer(String fullName, String email, String farmersNumber){
+        this.fullName=fullName;
         this.email=email;
         this.farmersNumber=farmersNumber;
     }
@@ -80,8 +69,7 @@ public class Farmer {
     public String toString() {
         return "Farmer{" +
                 "Id=" + Id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", farmersNumber='" + farmersNumber + '\'' +
                 ", email='" + email + '\'' +
                 '}';

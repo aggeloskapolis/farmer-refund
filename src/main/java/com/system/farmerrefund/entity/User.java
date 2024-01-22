@@ -89,7 +89,9 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+
     }
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(	name = "user_roles",

@@ -11,18 +11,18 @@ import java.util.List;
 public class FarmerService {
 
     @Autowired
-    private static FarmerRepository farmerRepository;
+    private FarmerRepository farmerRepository;
 
     public List<Farmer> getAllFarmers() {
         return farmerRepository.findAll();
     }
 
-    public static Farmer getFarmerById(Integer id) {
+    public Farmer getFarmerById(Integer id) {
         return farmerRepository.findById(id).orElse(null);
     }
 
     public List<Farmer> getFarmersByName(String name) {
-        return farmerRepository.findByLastName(name);
+        return farmerRepository.findByFullName(name);
     }
 
     public void saveFarmer(Farmer farmer) {

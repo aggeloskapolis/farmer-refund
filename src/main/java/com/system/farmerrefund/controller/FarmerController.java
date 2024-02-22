@@ -29,14 +29,6 @@ public class FarmerController {
         model.addAttribute("farmer", farmer);
         return "add_farmer";
     }
-
-   /* @GetMapping("/{farmerId}")
-    public String editFarmer(@PathVariable Integer farmerId, Model model) {
-        Farmer farmer = FarmerService.getFarmerById(farmerId);
-        model.addAttribute("farmer", farmer);
-        return "add_farmer";
-    }
-*/
     @PostMapping("/new")
     public String saveFarmer(@ModelAttribute("farmer") Farmer farmer, Model model) {
         farmerService.saveFarmer(farmer);

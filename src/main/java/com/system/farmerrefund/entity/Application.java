@@ -26,10 +26,6 @@ public class Application {
     @Column
     private Integer farmerId;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "farmer_id")
-    private Farmer farmer;*/
-
     public Application() {
     }
 
@@ -98,15 +94,6 @@ public class Application {
     public void setFarmerId(Integer farmerid) {
         this.farmerId = farmerid;
     }
-
-    /*  public Farmer getFarmer() {
-        return farmer;
-    }
-
-    public void setFarmer(Farmer farmer) {
-        this.farmer = farmer;
-    }
-*/
 
 
     @ManyToMany(fetch = FetchType.LAZY)

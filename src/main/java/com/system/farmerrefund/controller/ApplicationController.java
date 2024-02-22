@@ -5,6 +5,7 @@ import com.system.farmerrefund.entity.Farmer;
 import com.system.farmerrefund.entity.User;
 import com.system.farmerrefund.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,30 +42,45 @@ public class ApplicationController {
     public String addApplication(Model model) {
         Application application = new Application();
         Integer currentFarmerId = getCurrentFarmerId();
-        Farmer currentFarmer = new Farmer();
-        currentFarmer.setId(currentFarmerId);
+
         application.setId(new Farmer(currentFarmerId).getId());
         model.addAttribute("application", application);
         return "new_application";
     }
 
-    @GetMapping("/{applicationId}")
-    public String editApplication(@PathVariable Integer applicationId, Model model) {
+  /*  @GetMapping("/{applicationId}")
+    public String editApplication(@PathVariable("applicationId") Integer applicationId, Model model) {
         Optional<Application> application = applicationService.getApplicationById(applicationId);
         model.addAttribute("application", application);
         return "edit_application";
-    }
+    }*/
 
     @PostMapping("/saveApp")
-    public String saveApplication(@ModelAttribute("application") Application application, Model model) {
+    public String saveApplication(@ModelAttribute Application application, Model model) {
         Integer currentFarmerId = getCurrentFarmerId();
         application.setFarmerId(currentFarmerId);
         applicationService.saveApplication(application);
-        // Assuming you have a way to determine the current farmer (maybe from authentication)
         List<Application> applications = applicationService.getApplicationsByFarmersId(currentFarmerId);
         model.addAttribute("applications", applications);
         return "myapplication";
     }
+
+
+
+    @PostMapping("/saveApp/{applicationId}")
+    public ResponseEntity<String> saveApplication(@PathVariable Integer applicationId, @RequestParam boolean approved) {
+        Optional<Application> optionalApplication = applicationService.getApplicationById(applicationId);
+
+        if (optionalApplication.isPresent()) {
+            Application application = optionalApplication.get();
+            application.setApproved(approved);
+            applicationService.saveApplication(application);
+            return ResponseEntity.ok("Application with ID " + applicationId + " updated successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     @DeleteMapping("/{applicationId}")
     public String deleteApplication(@PathVariable Integer applicationId) {

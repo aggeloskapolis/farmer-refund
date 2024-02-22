@@ -35,8 +35,6 @@ public class RoleController {
     @GetMapping("/{roleName}")
     @ResponseBody
     public Role getRoleByName(@PathVariable String roleName) {
-        // Implement logic to find and return a role by name
-        // This could be a stream or loop through the roles list
         return roles.stream()
                 .filter(role -> role.getName().equals(roleName))
                 .findFirst()

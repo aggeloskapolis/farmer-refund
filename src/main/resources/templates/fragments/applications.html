@@ -1,30 +1,42 @@
-<applications>
-    <!-- fragments/applications-fragment.html -->
-    <div th:if="${not #lists.isEmpty(applications)}">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Production Details</th>
-                <th>Location</th>
-                <th>Description</th>
-                <th>Approved</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="app : ${applications}">
-                <td th:text="${app.title}"></td>
-                <td th:text="${app.productionDetails}"></td>
-                <td th:text="${app.location}"></td>
-                <td th:text="${app.description}"></td>
-                <td th:text="${app.approved} ? 'Yes' : 'No'"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div th:if="${#lists.isEmpty(applications)}">
-        No Applications found!
-    </div>
-
-
-</applications>
+<form th:action="@{/saveApp}" method="post">
+    <applications>
+        <!-- fragments/applications-fragment.html -->
+        <div th:if="${not #lists.isEmpty(applications)}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Production Details</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Approved</th>
+                    <th>Action</th> <!-- Add a column for the Save button -->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="app : ${applications}">
+                    <form th:action="@{/saveApp}" method="post"> <!-- Each row has its own form -->
+                        <td><input type="text" name="title" th:value="${app.title}" /></td>
+                        <td><input type="text" name="productionDetails" th:value="${app.productionDetails}" /></td>
+                        <td><input type="text" name="location" th:value="${app.location}" /></td>
+                        <td><input type="text" name="description" th:value="${app.description}" /></td>
+                        <td>
+                            <!-- Use checkboxes to toggle approval status -->
+                            <input type="checkbox" name="approved" th:checked="${app.approved}" />
+                        </td>
+                        <td>
+                            <!-- Hidden input field for the application ID -->
+                            <input type="hidden" name="id" th:value="${app.id}" />
+                            <!-- Save button for each application -->
+                            <button type="submit" class="save-btn">Save</button>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${#lists.isEmpty(applications)}">
+            No Applications found!
+        </div>
+    </applications>
+</form>

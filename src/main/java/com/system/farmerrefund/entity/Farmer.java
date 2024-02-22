@@ -26,13 +26,8 @@ public class Farmer {
         return Id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-
-    public String getFarmersNumber() {
-        return farmersNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getEmail() {
@@ -52,9 +47,7 @@ public class Farmer {
         this.farmersNumber = farmersNumber;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public Farmer(Integer currentFarmerId) {
     }

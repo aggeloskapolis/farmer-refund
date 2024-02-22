@@ -1,35 +1,3 @@
-<!--<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    &lt;!&ndash; Include your header content here &ndash;&gt;
-</head>
-<body>
-<div th:if="${not #lists.isEmpty(farmer)}">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Fullname</th>
-            <th>Email</th>
-            <th>FarmersNumber</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="f : ${farmer}">
-            <td th:text="${f.fullName}"></td>
-            <td th:text="${f.email}"></td>
-            <td th:text="${f.farmersNumber}"></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-<div th:if="${#lists.isEmpty(farmer)}">
-    No Farmers found!
-</div>
-&lt;!&ndash; Include your JavaScript and other content here &ndash;&gt;
-</body>
-</html>-->
-
-
 <farmers>
     <div th:if="${not #lists.isEmpty(farmers)}">
         <table class="table">

@@ -1,7 +1,9 @@
 package com.system.farmerrefund.service;
 
+import com.system.farmerrefund.entity.Farmer;
 import com.system.farmerrefund.entity.Role;
 import com.system.farmerrefund.entity.User;
+import com.system.farmerrefund.repository.FarmerRepository;
 import com.system.farmerrefund.repository.RoleRepository;
 import com.system.farmerrefund.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +29,9 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
+    private FarmerRepository farmerRepository;
+
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -34,19 +39,20 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public Integer saveUser(User user) {
-        String passwd= user.getPassword();
+        String passwd = user.getPassword();
         String encodedPassword = passwordEncoder.encode(passwd);
         user.setPassword(encodedPassword);
 
+        // Save the user details to the user table
         Role role = roleRepository.findByName("ROLE_FARMER")
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         user.setRoles(roles);
-
         user = userRepository.save(user);
         return user.getId();
     }
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

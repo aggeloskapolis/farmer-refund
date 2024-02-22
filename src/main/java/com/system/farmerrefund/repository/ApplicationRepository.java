@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ApplicationRepository extends JpaRepository<Application, Integer> {
     List<Application> findByFarmerId(Integer farmerId);
-    // **You can add more query methods based on your requirements
 }

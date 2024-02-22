@@ -10,7 +10,9 @@
     <!-- Content specific to this page -->
     <!-- Include the students fragment -->
     <div class="container" >
-        <div th:replace="~{fragments/applications :: applications}"></div>
+        <form th:action="@{/saveApp}" method="post" th:object="${application}">
+            <div th:replace="~{fragments/applications :: applications}"></div>
+        </form>
     </div>
 </main>
 

@@ -13,7 +13,7 @@ public class Farmer {
     @Column
     private String fullName;
     @Column
-    private String farmersNumber;
+    public String farmersNumber;
 
     @Column
     private String email;
@@ -32,6 +32,10 @@ public class Farmer {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
 
